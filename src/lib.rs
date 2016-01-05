@@ -1,92 +1,111 @@
-use std::thread;
 use std::io::{self, Write};
-use std::sync::mpsc::channel;
-use std::sync::mpsc::Sender;
 
-#[test]
-fn it_works() {
+extern crate terminal_size;
+use terminal_size::{terminal_size, Width};
+
+/// Struct that used for presenting progress bar with plain texts.
+///
+/// # Examples
+///
+/// ```
+/// use std::thread;
+///
+/// extern crate progress;
+///
+/// let bar = progress::Bar::new();
+///
+/// bar.set_job_title("Working...");
+///
+/// for i in 0..11 {
+///     thread::sleep_ms(100);
+///     bar.reach_percent(i * 10);
+/// }
+pub struct Bar {
+    _job_title: String,
+    _progress_percentage: i32,
+    _left_cap: String,
+    _right_cap: String,
+    _filled_symbol: String,
+    _empty_symbol: String,
 }
 
-const STOP_MAGIC: &'static str = "cAtStOp";
-
-pub struct Pbar {
-    thread_handler: Option<thread::JoinHandle<()>>,
-    tx: Sender<String>,
-    current_progress: i32,
-}
-
-impl Pbar {
-    pub fn new(goal: i32) -> Pbar {
-        let (tx, rx) = channel::<String>();
-        let handler = thread::spawn(move || {
-            let mut job_title = String::new();
-            let mut percent: i32 = 0;
-            let rx = rx;
-            let goal = goal;
-
-            fn show_progress(percent: i32, job_title: &String, bar_len: i32) {
-                let sym_to_draw = (bar_len as f32) * (percent as f32 / 100.0);
-                let sym_to_draw = sym_to_draw as i32;
-
-                io::stdout().flush().unwrap();
-                print!("\r");
-
-                print!("{:<30}", job_title);
-                print!("[");
-                for _ in 0..sym_to_draw {
-                    print!("=");
-                }
-                for _ in sym_to_draw..bar_len {
-                    print!("-");
-                }
-                print!("]");
-            };
-
-            while let Ok(packet) = rx.recv() {
-                match packet.as_ref() {
-                    STOP_MAGIC => {
-                        print!("\n");
-                        return;
-                    },
-                    _ if packet.trim().parse::<f32>().is_ok() => {
-                        percent = packet.trim().parse::<i32>().unwrap();
-                        show_progress(percent, &job_title, goal);
-                    },
-                    _ => {
-                        job_title.clone_from(&packet);
-                        show_progress(percent, &job_title, goal);
-                    },
-                }
-            }
-        });
-
-        Pbar {
-            thread_handler: Some(handler),
-            tx: tx,
-            current_progress: 0,
+impl Bar {
+    /// Create a new progress bar.
+    pub fn new() -> Bar {
+        Bar {
+            _job_title: String::new(),
+            _progress_percentage: 0,
+            _left_cap: String::from("["),
+            _right_cap: String::from("]"),
+            _filled_symbol: String::from("="),
+            _empty_symbol: String::from("-"),
         }
     }
 
-    pub fn set_job_title(&mut self, title: &String) {
-        self.tx.send(title.clone()).unwrap();
+    /// Reset progress percentage to zero and job title to empty string. Also
+    /// prints "\n".
+    pub fn jobs_done(&mut self) {
+        self._job_title.clear();
+        self._progress_percentage = 0;
+
+        print!("\n");
     }
 
+    /// Set text shown in progress bar.
+    pub fn set_job_title(&mut self, new_title: &str) {
+        self._job_title.clear();
+        self._job_title.push_str(new_title);
+        self._show_progress();
+    }
+
+    /// Put progress to given percentage.
     pub fn reach_percent(&mut self, percent: i32) {
-        self.current_progress = percent;
-        self.tx.send(format!("{}", percent)).unwrap();
+        self._progress_percentage = percent;
+        self._show_progress();
     }
 
+    /// Increase progress with given percentage.
     pub fn add_percent(&mut self, progress: i32) {
-        self.current_progress += progress;
-        self.tx.send(format!("{}", self.current_progress)).unwrap();
+        self._progress_percentage += progress;
+        self._show_progress();
     }
 }
 
-impl Drop for Pbar {
-    fn drop(&mut self) {
-        let join_handler = self.thread_handler.take().unwrap();
+impl Bar {
+    fn _show_progress(&self) {
+        let width = if let Some((Width(w), _)) = terminal_size() {
+            w as i32
+        } else {
+            81 as i32
+        };
+        let overhead = self._progress_percentage / 100;
+        let left_percentage = self._progress_percentage - overhead * 100;
+        let bar_len = width - (50 + 5) - 2;
+        let bar_finished_len = ((bar_len as f32) *
+                                (left_percentage as f32 / 100.0)) as i32;
+        let filled_symbol = if overhead & 0b1 == 0 {
+            &self._filled_symbol
+        } else {
+            &self._empty_symbol
+        };
+        let empty_symbol = if overhead & 0b1 == 0 {
+            &self._empty_symbol
+        } else {
+            &self._filled_symbol
+        };
 
-        self.tx.send(STOP_MAGIC.to_string()).unwrap();
-        join_handler.join().unwrap();
+        io::stdout().flush().unwrap();
+        print!("\r");
+
+        print!("{:<50}", self._job_title);
+        print!("{}", self._left_cap);
+        for _ in 0..bar_finished_len {
+            print!("{}", filled_symbol);
+        }
+        for _ in bar_finished_len..bar_len {
+            print!("{}", empty_symbol);
+        }
+        print!("{}", self._right_cap);
+        print!("{:>4}%", self._progress_percentage);
     }
 }

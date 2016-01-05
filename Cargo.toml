@@ -1,8 +1,13 @@
 [package]
-name = "pbar"
+name = "progress"
+description = "Library for showing text based progress bar and job status"
 version = "0.1.0"
 authors = ["Ying-Ruei Liang (KK) <thumbd03803@gmail.com>"]
+documentation = "http://ogham.rustdocs.org/ansi_term/"
+homepage = "https://github.com/TheKK/progress"
+keywords = ["progress", "bar", "terminal"]
+license = "MIT"
+readme = "README.md"
 
 [dependencies]
 terminal_size = "0.1.1"
-term-painter = "0.2.1"
