@@ -1,3 +1,7 @@
+#![crate_name = "progress"]
+#![crate_type = "rlib"]
+#![crate_type = "dylib"]
+
 use std::io::{self, Write};
 
 extern crate terminal_size;
