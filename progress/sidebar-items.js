@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Bar","Struct that used for presenting progress bar with plain texts."]]});
