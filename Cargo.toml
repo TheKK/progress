@@ -1,0 +1,8 @@
+[package]
+name = "pbar"
+version = "0.1.0"
+authors = ["Ying-Ruei Liang (KK) <thumbd03803@gmail.com>"]
+
+[dependencies]
+terminal_size = "0.1.1"
+term-painter = "0.2.1"
