@@ -20,7 +20,23 @@ progress = "0.1.0"
 Usage
 =====
 
-Please check documentations for each structs. Life is easy here :)
+``` rust
+use std::thread;
+
+extern crate progress;
+
+let bar = progress::Bar::new();
+
+bar.set_job_title("Working...");
+
+for i in 0..11 {
+    thread::sleep_ms(100);
+    bar.reach_percent(i * 10);
+}
+```
+
+Please check [documentations](https://TheKK.github.io/progress/progress) for
+more detail.
 
 Contribution
 ============
