@@ -2,6 +2,52 @@
 #![crate_type = "rlib"]
 #![crate_type = "dylib"]
 
+//! **progress** is meant to be a set of useful tools for showing program running
+//! progress (as its name) and steps.
+//!
+//! Installation
+//! ============
+//!
+//! Add the following lines to your `Cargo.toml` dependencies section, if you
+//! use [Cargo](https://crates.io):
+//!
+//! ```
+//! [dependencies]
+//! progress = "0.1.0"
+//! ```
+//!
+//! Usage
+//! =====
+//!
+//! Please check documentations for each structs. Life is easy here :)
+//!
+//! Who create this
+//! ===============
+//!
+//! - [Ying-Ruei Liang (KK)](https://github.com/TheKK)
+//!
+//! Contribution
+//! ============
+//!
+//! I can't believe you would say that, but if you have any great idea or any
+//! bug report, don't be hesitate! It would be more wonderful if someone wants
+//! to write some code for this project!
+//!
+//! TODO list
+//! =========
+//!
+//! - BarBuilder, so we can do some customization, e.g. change the symbols used
+//! - Add more type of indicators, e.g. spinning symbol or nayn cat :3
+//! - Color/styled text support (print!("{:<50}") will count unprintable text as
+//! well, I have to solve it first)
+//! - Make output format customizable, despite I have no idea how to achieve this
+//! for now.
+//!
+//! License
+//! =======
+//!
+//! MIT
+
 use std::io::{self, Write};
 
 extern crate terminal_size;
