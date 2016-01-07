@@ -3,6 +3,7 @@ name = "progress"
 description = "Library for showing text based progress bar and job status"
 authors = ["Ying-Ruei Liang (KK) <thumbd03803@gmail.com>"]
 version = "0.1.1"
+exclude = ["assets/*"]
 
 homepage = "https://github.com/TheKK/progress"
 documentation = "https://TheKK.github.io/progress/progress"
