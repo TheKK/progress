@@ -33,7 +33,7 @@ progress = { git = "https://github.com/TheKK/progress.git" }
 Usage
 =====
 
-Here shows you how to crate and use and progress bar.
+Here shows you how to crate and use progress bar.
 
 ``` rust
 use std::thread;
