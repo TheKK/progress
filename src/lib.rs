@@ -292,7 +292,7 @@ pub struct Text {
 }
 
 impl Text {
-    /// Create a new progress text showing current statue with plain text
+    /// Create a new progress text.
     pub fn new() -> Text {
         Text {
             _job_title: String::new(),
