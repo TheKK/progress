@@ -285,7 +285,7 @@ impl Bar {
 ///     text.set_job_title("This must be my dream zzzzzz");
 ///     thread::sleep_ms(1000);
 ///
-///     text.job_done();
+///     text.jobs_done();
 /// }
 pub struct Text {
     _job_title: String,
