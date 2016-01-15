@@ -257,3 +257,66 @@ impl Bar {
         print!("{:>4}%", self._progress_percentage);
     }
 }
+
+/// Struct that used for presenting progress with plain texts.
+///
+/// # Examples
+///
+/// ```
+/// use std::thread;
+///
+/// extern crate progress;
+///
+/// fn main() {
+///     let mut text = progress::Text::new();
+///
+///     text.set_job_title("Drawing...");
+///     thread::sleep_ms(1000);
+///
+///     text.set_job_title("Painting...");
+///     thread::sleep_ms(1000);
+///
+///     text.set_job_title("Sleeping zzz");
+///     thread::sleep_ms(1000);
+///
+///     text.set_job_title("Wait! Is that a nyan cat?");
+///     thread::sleep_ms(1000);
+///
+///     text.set_job_title("This must be my dream zzzzzz");
+///     thread::sleep_ms(1000);
+///
+///     text.job_done();
+/// }
+pub struct Text {
+    _job_title: String,
+}
+
+impl Text {
+    /// Create a new progress text showing current statue with plain text
+    pub fn new() -> Text {
+        Text {
+            _job_title: String::new(),
+        }
+    }
+
+    /// Set text shown in progress text.
+    pub fn set_job_title(&mut self, new_title: &str) {
+        self._job_title.clear();
+        self._job_title.push_str(new_title);
+        self._show_progress();
+    }
+
+    /// Tell progress::Text everything has been done. Also prints "\n".
+    pub fn jobs_done(&self) {
+        print!("\n");
+    }
+}
+
+impl Text {
+    fn _show_progress(& self) {
+        io::stdout().flush().unwrap();
+        print!("\r");
+        // TODO How to handle extra text?
+        print!("{:<81}", self._job_title);
+    }
+}
