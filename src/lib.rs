@@ -158,13 +158,15 @@ impl BarBuilder {
 ///
 /// extern crate progress;
 ///
-/// let bar = progress::Bar::new();
+/// fn main() {
+///     let bar = progress::Bar::new();
 ///
-/// bar.set_job_title("Working...");
+///     bar.set_job_title("Working...");
 ///
-/// for i in 0..11 {
-///     thread::sleep_ms(100);
-///     bar.reach_percent(i * 10);
+///     for i in 0..11 {
+///         thread::sleep_ms(100);
+///         bar.reach_percent(i * 10);
+///     }
 /// }
 pub struct Bar {
     _job_title: String,
