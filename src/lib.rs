@@ -53,6 +53,102 @@ use std::io::{self, Write};
 extern crate terminal_size;
 use terminal_size::{terminal_size, Width};
 
+/// A builder that used for creating customize progress bar.
+///
+/// # Examples
+///
+/// ```
+/// use std::thread;
+///
+/// extern crate progress;
+///
+/// fn main() {
+///     let mut bar = progress::BarBuilder::new()
+///         .left_cap("<")
+///         .right_cap(">")
+///         .empty_symbol("-")
+///         .filled_symbol("/")
+///         .build();
+///
+///     bar.set_job_title("Meow...");
+///
+///     for i in 0..11 {
+///         thread::sleep_ms(500);
+///         bar.reach_percent(i * 10);
+///     }
+/// }
+pub struct BarBuilder {
+    _left_cap: Option<String>,
+    _right_cap: Option<String>,
+    _filled_symbol: Option<String>,
+    _empty_symbol: Option<String>,
+}
+
+impl BarBuilder {
+    /// Create a new progress bar builder.
+    pub fn new() -> BarBuilder {
+        BarBuilder {
+            _left_cap: None,
+            _right_cap: None,
+            _filled_symbol: None,
+            _empty_symbol: None,
+        }
+    }
+
+    /// Set desired symbol used as left cap
+    ///
+    /// [=========-] 90%
+    /// ^
+    pub fn left_cap(&mut self, symbol: &str) -> &mut BarBuilder {
+        self._left_cap = Some(symbol.to_string());
+
+        self
+    }
+
+    /// Set desired symbol used as right cap
+    ///
+    /// [=========-] 90%
+    ///            ^
+    pub fn right_cap(&mut self, symbol: &str) -> &mut BarBuilder {
+        self._right_cap = Some(symbol.to_string());
+
+        self
+    }
+
+    /// Set desired symbol used as filled bar
+    ///
+    /// [=========-] 90%
+    ///  ^^^^^^^^^
+    pub fn filled_symbol(&mut self, symbol: &str) -> &mut BarBuilder {
+        self._filled_symbol = Some(symbol.to_string());
+
+        self
+    }
+
+    /// Set desired symbol used as empty bar
+    ///
+    /// [=========-] 90%
+    ///           ^
+    pub fn empty_symbol(&mut self, symbol: &str) -> &mut BarBuilder {
+        self._empty_symbol = Some(symbol.to_string());
+
+        self
+    }
+
+    /// Build progress bar according to previous configurations.
+    pub fn build(&mut self) -> Bar {
+        // XXX Does `take()` appropriate way?
+        Bar {
+            _job_title: String::new(),
+            _progress_percentage: 0,
+            _left_cap: self._left_cap.take().unwrap_or(String::from("[")),
+            _right_cap: self._right_cap.take().unwrap_or(String::from("]")),
+            _filled_symbol: self._filled_symbol.take().unwrap_or(String::from("=")),
+            _empty_symbol: self._empty_symbol.take().unwrap_or(String::from("-")),
+        }
+    }
+}
+
 /// Struct that used for presenting progress bar with plain texts.
 ///
 /// # Examples
