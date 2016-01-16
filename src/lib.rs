@@ -97,6 +97,7 @@ impl BarBuilder {
 
     /// Set desired symbol used as left cap
     ///
+    /// ```shell
     /// [=========-] 90%
     /// ^
     pub fn left_cap(&mut self, symbol: &str) -> &mut BarBuilder {
@@ -107,6 +108,7 @@ impl BarBuilder {
 
     /// Set desired symbol used as right cap
     ///
+    /// ```shell
     /// [=========-] 90%
     ///            ^
     pub fn right_cap(&mut self, symbol: &str) -> &mut BarBuilder {
@@ -117,6 +119,7 @@ impl BarBuilder {
 
     /// Set desired symbol used as filled bar
     ///
+    /// ```shell
     /// [=========-] 90%
     ///  ^^^^^^^^^
     pub fn filled_symbol(&mut self, symbol: &str) -> &mut BarBuilder {
@@ -127,8 +130,10 @@ impl BarBuilder {
 
     /// Set desired symbol used as empty bar
     ///
+    /// ```shell
     /// [=========-] 90%
     ///           ^
+    ///  ```
     pub fn empty_symbol(&mut self, symbol: &str) -> &mut BarBuilder {
         self._empty_symbol = Some(symbol.to_string());
 
