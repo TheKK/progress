@@ -156,6 +156,12 @@ impl BarBuilder {
 
 /// Struct that used for presenting progress bar with plain texts.
 ///
+/// It looks like:
+///
+/// ```shell
+/// Doing something            [===-------] 70%
+/// ```
+///
 /// # Examples
 ///
 /// ```
@@ -264,6 +270,12 @@ impl Bar {
 }
 
 /// Struct that used for presenting progress with plain texts.
+///
+/// It looks like:
+///
+/// ```shell
+/// Doing something
+/// ```
 ///
 /// # Examples
 ///
