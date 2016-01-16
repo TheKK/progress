@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `Bar` struct in crate `progress`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, Bar">
+    <meta name="description" content="API documentation for the Rust `Text` struct in crate `progress`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Text">
 
-    <title>progress::Bar - Rust</title>
+    <title>progress::Text - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../main.css">
 
@@ -26,7 +26,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>progress</a></p><script>window.sidebarCurrent = {name: 'Bar', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='index.html'>progress</a></p><script>window.sidebarCurrent = {name: 'Text', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -41,18 +41,18 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>progress</a>::<wbr><a class='struct' href=''>Bar</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>progress</a>::<wbr><a class='struct' href=''>Text</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-28' class='srclink' href='../src/progress/lib.rs.html#182-189' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Bar {
+        </span><a id='src-79' class='srclink' href='../src/progress/lib.rs.html#307-309' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Text {
     // some fields omitted
-}</pre><div class='docblock'><p>Struct that used for presenting progress bar with plain texts.</p>
+}</pre><div class='docblock'><p>Struct that used for presenting progress with plain texts.</p>
 
 <p>It looks like:</p>
 
-<pre><code class="language-shell">Doing something            [===-------] 70%
+<pre><code class="language-shell">Doing something
 </code></pre>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1><pre class='rust rust-example-rendered'>
@@ -61,26 +61,31 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>progress</span>;
 
 <span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='kw'>let</span> <span class='ident'>bar</span> <span class='op'>=</span> <span class='ident'>progress</span>::<span class='ident'>Bar</span>::<span class='ident'>new</span>();
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>text</span> <span class='op'>=</span> <span class='ident'>progress</span>::<span class='ident'>Text</span>::<span class='ident'>new</span>();
 
-    <span class='ident'>bar</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Working...&quot;</span>);
+    <span class='ident'>text</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Drawing...&quot;</span>);
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
 
-    <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>11</span> {
-        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>100</span>);
-        <span class='ident'>bar</span>.<span class='ident'>reach_percent</span>(<span class='ident'>i</span> <span class='op'>*</span> <span class='number'>10</span>);
-    }
+    <span class='ident'>text</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Painting...&quot;</span>);
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+    <span class='ident'>text</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Sleeping zzz&quot;</span>);
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+    <span class='ident'>text</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Wait! Is that a nyan cat?&quot;</span>);
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+    <span class='ident'>text</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;This must be my dream zzzzzz&quot;</span>);
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>1000</span>);
+
+    <span class='ident'>text</span>.<span class='ident'>jobs_done</span>();
 }</pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../progress/struct.Bar.html' title='progress::Bar'>Bar</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../progress/struct.Bar.html' title='progress::Bar'>Bar</a></code></h4>
-<div class='docblock'><p>Create a new progress bar.</p>
-</div><h4 id='method.jobs_done' class='method'><code>fn <a href='#method.jobs_done' class='fnname'>jobs_done</a>(&amp;mut self)</code></h4>
-<div class='docblock'><p>Reset progress percentage to zero and job title to empty string. Also
-prints &quot;\n&quot;.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../progress/struct.Text.html' title='progress::Text'>Text</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../progress/struct.Text.html' title='progress::Text'>Text</a></code></h4>
+<div class='docblock'><p>Create a new progress text.</p>
 </div><h4 id='method.set_job_title' class='method'><code>fn <a href='#method.set_job_title' class='fnname'>set_job_title</a>(&amp;mut self, new_title: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
-<div class='docblock'><p>Set text shown in progress bar.</p>
-</div><h4 id='method.reach_percent' class='method'><code>fn <a href='#method.reach_percent' class='fnname'>reach_percent</a>(&amp;mut self, percent: <a href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></h4>
-<div class='docblock'><p>Put progress to given percentage.</p>
-</div><h4 id='method.add_percent' class='method'><code>fn <a href='#method.add_percent' class='fnname'>add_percent</a>(&amp;mut self, progress: <a href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></h4>
-<div class='docblock'><p>Increase progress with given percentage.</p>
+<div class='docblock'><p>Set text shown in progress text.</p>
+</div><h4 id='method.jobs_done' class='method'><code>fn <a href='#method.jobs_done' class='fnname'>jobs_done</a>(&amp;self)</code></h4>
+<div class='docblock'><p>Tell progress::Text everything has been done. Also prints &quot;\n&quot;.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
 

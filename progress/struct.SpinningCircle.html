@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `SpinningCircle` struct in crate `progress`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, SpinningCircle">
+
+    <title>progress::SpinningCircle - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>progress</a></p><script>window.sidebarCurrent = {name: 'SpinningCircle', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>progress</a>::<wbr><a class='struct' href=''>SpinningCircle</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-96' class='srclink' href='../src/progress/lib.rs.html#381-386' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct SpinningCircle {
+    // some fields omitted
+}</pre><div class='docblock'><p>Struct that used for presenting progress with plain texts.</p>
+
+<p>It looks like:</p>
+
+<pre><code class="language-shell">* Doing something
+/ Doing another thing
+</code></pre>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>progress</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>spinningCircle</span> <span class='op'>=</span> <span class='ident'>progress</span>::<span class='ident'>SpinningCircle</span>::<span class='ident'>new</span>();
+
+    <span class='ident'>spinningCircle</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Writing boring and stupid homeworks&quot;</span>);
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>50</span> {
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>50</span>);
+        <span class='ident'>spinningCircle</span>.<span class='ident'>tick</span>();
+    }
+    <span class='ident'>spinningCircle</span>.<span class='ident'>jobs_done</span>();
+
+    <span class='ident'>spinningCircle</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Previewing boring and stupid subjects&quot;</span>);
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>50</span> {
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>50</span>);
+        <span class='ident'>spinningCircle</span>.<span class='ident'>tick</span>();
+    }
+    <span class='ident'>spinningCircle</span>.<span class='ident'>jobs_done</span>();
+
+    <span class='ident'>spinningCircle</span>.<span class='ident'>set_job_title</span>(<span class='string'>&quot;Learning and creating interesting programs&quot;</span>);
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>50</span> {
+        <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>50</span>);
+        <span class='ident'>spinningCircle</span>.<span class='ident'>tick</span>();
+    }
+    <span class='ident'>spinningCircle</span>.<span class='ident'>jobs_done</span>();
+}</pre>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../progress/struct.SpinningCircle.html' title='progress::SpinningCircle'>SpinningCircle</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../progress/struct.SpinningCircle.html' title='progress::SpinningCircle'>SpinningCircle</a></code></h4>
+<div class='docblock'><p>Create a new progress spinning circle.</p>
+</div><h4 id='method.set_job_title' class='method'><code>fn <a href='#method.set_job_title' class='fnname'>set_job_title</a>(&amp;mut self, new_title: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>)</code></h4>
+<div class='docblock'><p>Set text shown in progress spinning circle.</p>
+</div><h4 id='method.tick' class='method'><code>fn <a href='#method.tick' class='fnname'>tick</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>Tell spinning circle to spin a bit.</p>
+</div><h4 id='method.jobs_done' class='method'><code>fn <a href='#method.jobs_done' class='fnname'>jobs_done</a>(&amp;self)</code></h4>
+<div class='docblock'><p>Print finished symbol at the position spinning circle symbol used to be.
+And print &quot;\n&quot; to jump to next line.</p>
+
+<p>e.g.
+* Collection kitties</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "progress";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
