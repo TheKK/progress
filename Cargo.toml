@@ -6,6 +6,7 @@ version = "0.1.1"
 exclude = ["assets/*"]
 
 homepage = "https://github.com/TheKK/progress"
+repository = "https://github.com/TheKK/progress/"
 documentation = "https://TheKK.github.io/progress/progress"
 readme = "README.md"
 license = "MIT"
