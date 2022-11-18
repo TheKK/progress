@@ -33,7 +33,7 @@ progress = { git = "https://github.com/TheKK/progress.git" }
 Usage
 =====
 
-Here shows you how to crate and use progress bar.
+This shows you how to crate and use the progress bar.
 
 ``` rust
 use std::thread;
@@ -50,17 +50,15 @@ for i in 0..11 {
 }
 ```
 
-Please check [documentations](https://TheKK.github.io/progress/progress) for
-more detail.
+Please check the [documentation](https://TheKK.github.io/progress/progress) for
+more details.
 
 Contribution
 ============
 
-I can't believe you would say that, but if you have any great idea want to share
-or any bug to report, don't be hesitate! It would be more wonderful if someone
-wants to write some code for this project!
+If you have any great ideas that you want to share, or any bug reports, don't hesitate! It would be wonderful if anyone wanted to write some code for this project!
 
-Who create this
+Who created this
 ===============
 
 - [Ying-Ruei Liang (KK)](https://github.com/TheKK)
@@ -69,12 +67,11 @@ TODO list
 =========
 
 - BarBuilder, so we can do some customization, e.g. change the symbols used
-- Add more type of indicators, e.g. spinning symbol or nayn cat :3
-- Color/styled text support.
-  - I currently use `print!("{:<50}")`, but it count unprintable text as well, I
-  have to solve it first.
-- Make output format customizable, despite I have no idea how to achieve this
-for now (or shall we?).
+- Add more type of indicators, e.g. spinning symbol or nyan cat :3
+- Color/styled text support
+  - I currently use `print!("{:<50}")`, but it counts unprintable text as well. I'll have to solve that first.
+- Make output format customizable, although I have no idea how to achieve this
+for now.
 
 License
 =======
