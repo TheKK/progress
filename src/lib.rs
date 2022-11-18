@@ -19,9 +19,9 @@
 //! Usage
 //! =====
 //!
-//! Please check documentations for each structs. Life is easy here :)
+//! Please check the documentation for each struct. Life is easy here :)
 //!
-//! Who create this
+//! Who created this
 //! ===============
 //!
 //! - [Ying-Ruei Liang (KK)](https://github.com/TheKK)
@@ -29,18 +29,19 @@
 //! Contribution
 //! ============
 //!
-//! I can't believe you would say that, but if you have any great idea or any
-//! bug report, don't be hesitate! It would be more wonderful if someone wants
-//! to write some code for this project!
+//! If you have any great ideas that you want to share, or any bug reports, 
+//! don't hesitate! It would be wonderful if anyone wanted to write some code
+//! for this project!
 //!
 //! TODO list
 //! =========
 //!
 //! - BarBuilder, so we can do some customization, e.g. change the symbols used
-//! - Add more type of indicators, e.g. spinning symbol or nayn cat :3
-//! - Color/styled text support (print!("{:<50}") will count unprintable text as
-//! well, I have to solve it first)
-//! - Make output format customizable, despite I have no idea how to achieve this
+//! - Add more type of indicators, e.g. spinning symbol or nyan cat :3
+//! - Color/styled text support
+//!   - I currently use `print!("{:<50}")`, but it counts unprintable text as well.
+//!     I'll have to solve that first.
+//! - Make output format customizable, although I have no idea how to achieve this
 //! for now.
 //!
 //! License
@@ -53,7 +54,7 @@ use std::io::{self, Write};
 extern crate terminal_size;
 use terminal_size::{terminal_size, Width};
 
-/// Struct that used for presenting progress bar with plain texts.
+/// Struct used for presenting progress bar with plain text.
 ///
 /// # Examples
 ///
@@ -108,7 +109,7 @@ impl Bar {
         self._show_progress();
     }
 
-    /// Put progress to given percentage.
+    /// Set progress to given percentage.
     pub fn reach_percent(&mut self, percent: i32) {
         self._progress_percentage = percent;
         self._show_progress();
